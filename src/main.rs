@@ -3,8 +3,12 @@
 #[macro_use] extern crate rocket;
 
 mod controllers;
+mod presenters;
 mod dto;
 mod domain;
+mod usecases;
+mod repository;
+mod error;
 
 use controllers::vehicle_controller::{
     get_all_vehicles, 

@@ -8,11 +8,11 @@ pub struct VehicleCategoryDto {
     pub price_per_day: f64,
 }
 
-impl VehicleCategoryDto {
+impl From<VehicleCategory> for VehicleCategoryDto {
     // The translation of the 'from' method will depend on the corresponding
     // translation of the 'VehicleCategory' domain entity.
     // For now, I've included a placeholder, and this can be filled out later.
-    pub fn from(vehicle_category: VehicleCategory) -> Self {
+    fn from(vehicle_category: VehicleCategory) -> Self {
         VehicleCategoryDto {
             category: vehicle_category.category,
             price_per_day: vehicle_category.price_per_day

@@ -17,14 +17,14 @@ pub struct VehicleDto {
 // The translation of the 'from' method will depend on the corresponding
 // translation of the 'Vehicle' domain entity and 'VehicleCategoryDto'.
 // For now, I've included a placeholder, and this can be filled out later.
-impl VehicleDto {
-    pub fn from(vehicle: &Vehicle) -> Self {
+impl From<Vehicle> for VehicleDto {
+    fn from(vehicle: Vehicle) -> Self {
         // Placeholder implementation
         VehicleDto {
             uuid: vehicle.uuid,
-            registration_number: vehicle.registration_number.clone(),
-            make: vehicle.make.clone(),
-            model: vehicle.model.clone(),
+            registration_number: vehicle.registration_number,
+            make: vehicle.make,
+            model: vehicle.model,
             fuel_type: vehicle.fuel_type,
             vehicle_category: VehicleCategoryDto::from(vehicle.category),
         }

@@ -6,10 +6,9 @@ use crate::domain::entity::vehicle::Vehicle;
 static mut VEHICLES: Vec<Vehicle> = Vec::new();
 
 
-pub fn _add_vehicle(vehicle: Vehicle) {
+pub fn add_vehicle(vehicle: Vehicle) {
     unsafe { VEHICLES.push(vehicle); }
 }
-
 
 pub fn find_all() -> Vec<Vehicle> {
     unsafe { VEHICLES.clone() }

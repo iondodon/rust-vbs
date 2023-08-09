@@ -2,6 +2,7 @@ use uuid::Uuid;
 use std::collections::HashSet;
 use std::hash::{Hash, Hasher};
 use crate::domain::types::fuel_type::FuelType;
+use crate::dto::vehicle_dto::VehicleDto;
 
 use super::vehicle_category::VehicleCategory;
 
@@ -33,5 +34,20 @@ impl Eq for Vehicle {}
 impl Hash for Vehicle {
     fn hash<H: Hasher>(&self, state: &mut H) {
         self.id.hash(state);
+    }
+}
+
+impl From<VehicleDto> for Vehicle {
+    fn from(dto: VehicleDto) -> Self {
+        Self {
+            id: 0, // You'll need to set this appropriately based on your logic
+            uuid: dto.uuid,
+            registration_number: dto.registration_number,
+            make: dto.make,
+            model: dto.model,
+            fuel_type: dto.fuel_type,
+            category: VehicleCategory::from(dto.vehicle_category),
+            bookings: HashSet::new(),
+        }
     }
 }

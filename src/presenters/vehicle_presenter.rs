@@ -6,15 +6,21 @@ use crate::{
     usecases::{
         get_all_vehicles_use_case, 
         get_available_for_hire_use_case, 
-        get_cost_of_hiring_use_case
+        get_cost_of_hiring_use_case, add_new_hevicle_use_case
     }, 
     controllers::response::{
         all_vehicles_response::AllVehiclesResponse, 
         available_for_hire_response::AvailableForHireResponse, cost_response::CostResponse
     }, 
-    error::vbs_error::VbsError
+    error::vbs_error::VbsError, domain::entity::vehicle::Vehicle, dto::vehicle_dto::VehicleDto
 };
 
+
+pub fn create_new(new_vehicle_dto: VehicleDto) -> Result<(), VbsError> {
+    let new_vehicle = Vehicle::from(new_vehicle_dto);
+    add_new_hevicle_use_case::exec(new_vehicle);
+    Result::Ok(())
+}
 
 pub fn get_all_vehicles() -> AllVehiclesResponse {
     let vehicle_dtos = get_all_vehicles_use_case::exec();

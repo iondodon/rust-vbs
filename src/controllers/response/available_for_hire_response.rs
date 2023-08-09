@@ -15,6 +15,4 @@ impl AvailableForHireResponse {
             .collect();
         Self { vehicles: vehicles_dto }
     }
-
-    // You can add methods here to access or manipulate the vehicles, if needed
 }

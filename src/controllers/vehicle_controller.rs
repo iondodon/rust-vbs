@@ -7,8 +7,16 @@ use crate::controllers::response::all_vehicles_response::AllVehiclesResponse;
 use crate::controllers::response::available_for_hire_response::AvailableForHireResponse;
 use crate::controllers::response::cost_response::CostResponse;
 
+use crate::dto::vehicle_dto::VehicleDto;
+use crate::error::vbs_error::VbsError;
 use crate::presenters::vehicle_presenter;
 
+
+#[post("/", format = "json", data = "<new_vehicle>")]
+pub fn create_new_vehicle(new_vehicle: Json<VehicleDto>) -> Json<Result<(), VbsError>> {
+    let result = vehicle_presenter::create_new(new_vehicle.0);
+    Json(result)
+}
 
 #[get("/")]
 pub fn get_all_vehicles() -> Json<AllVehiclesResponse> {

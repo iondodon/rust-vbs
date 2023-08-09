@@ -16,7 +16,6 @@ pub struct VehicleDto {
 
 impl From<Vehicle> for VehicleDto {
     fn from(vehicle: Vehicle) -> Self {
-        // Placeholder implementation
         VehicleDto {
             uuid: vehicle.uuid,
             registration_number: vehicle.registration_number,

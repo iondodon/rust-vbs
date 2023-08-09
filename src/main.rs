@@ -11,6 +11,7 @@ mod repository;
 mod error;
 
 use controllers::vehicle_controller::{
+    create_new_vehicle,
     get_all_vehicles, 
     get_available_by_date, 
     get_cost_by_period
@@ -19,7 +20,8 @@ use controllers::vehicle_controller::{
 
 #[launch]
 fn rocket() -> _ {
-    rocket::build().mount("/", routes![
+    rocket::build().mount("/vehicles", routes![
+        create_new_vehicle,
         get_all_vehicles, 
         get_available_by_date, 
         get_cost_by_period

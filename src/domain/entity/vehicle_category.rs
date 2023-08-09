@@ -1,6 +1,6 @@
 use std::hash::{Hash, Hasher};
 use rocket::serde::{Serialize, Deserialize};
-use crate::domain::types::vehicle_type::VehicleType;
+use crate::{domain::types::vehicle_type::VehicleType, dto::vehicle_category_dto::VehicleCategoryDto};
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct VehicleCategory {
@@ -20,5 +20,15 @@ impl Eq for VehicleCategory {}
 impl Hash for VehicleCategory {
     fn hash<H: Hasher>(&self, state: &mut H) {
         self.id.hash(state);
+    }
+}
+
+impl From<VehicleCategoryDto> for VehicleCategory {
+    fn from(value: VehicleCategoryDto) -> Self {
+        Self { 
+            id: 1, 
+            category: value.category, 
+            price_per_day: value.price_per_day
+        }
     }
 }

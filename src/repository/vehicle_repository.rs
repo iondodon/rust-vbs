@@ -3,39 +3,23 @@ use uuid::Uuid;
 
 use crate::domain::entity::vehicle::Vehicle;
 
+static mut VEHICLES: Vec<Vehicle> = Vec::new();
 
-pub trait VehicleRepository {
-    fn find_all(&self) -> Vec<Vehicle>;
-    fn get_available_for_hire_on_date(&self, date: NaiveDate) -> Vec<Vehicle>;
-    fn find_by_uuid(&self, uuid: Uuid) -> Option<Vehicle>;
+
+pub fn _add_vehicle(vehicle: Vehicle) {
+    unsafe { VEHICLES.push(vehicle); }
 }
 
-pub struct InMemoryVehicleRepository {
-    vehicles: Vec<Vehicle>,
+
+pub fn find_all() -> Vec<Vehicle> {
+    unsafe { VEHICLES.clone() }
 }
 
-impl InMemoryVehicleRepository {
-    pub fn new() -> Self {
-        Self {
-            vehicles: Vec::new(),
-        }
-    }
-
-    pub fn add_vehicle(&mut self, vehicle: Vehicle) {
-        self.vehicles.push(vehicle);
-    }
+pub fn get_available_for_hire_on_date(_date: NaiveDate) -> Vec<Vehicle> {
+    unsafe { VEHICLES.clone() }
 }
 
-impl VehicleRepository for InMemoryVehicleRepository {
-    fn find_all(&self) -> Vec<Vehicle> {
-        self.vehicles.clone()
-    }
-
-    fn get_available_for_hire_on_date(&self, _date: NaiveDate) -> Vec<Vehicle> {
-        self.vehicles.clone()
-    }
-
-    fn find_by_uuid(&self, uuid: Uuid) -> Option<Vehicle> {
-        self.vehicles.iter().find(|&v| v.uuid == uuid).cloned()
-    }
+pub fn find_by_uuid(uuid: Uuid) -> Option<Vehicle> {
+    unsafe { VEHICLES.iter().find(|&v| v.uuid == uuid).cloned() }
 }
+

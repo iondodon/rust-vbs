@@ -14,9 +14,6 @@ pub struct VehicleDto {
     pub vehicle_category: VehicleCategoryDto,
 }
 
-// The translation of the 'from' method will depend on the corresponding
-// translation of the 'Vehicle' domain entity and 'VehicleCategoryDto'.
-// For now, I've included a placeholder, and this can be filled out later.
 impl From<Vehicle> for VehicleDto {
     fn from(vehicle: Vehicle) -> Self {
         // Placeholder implementation
